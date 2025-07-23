@@ -6,7 +6,6 @@ export const saveState = (state: AppState): void => {
     if (typeof window !== "undefined") {
         try {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-            // Also broadcast to other tabs
             window.dispatchEvent(
                 new CustomEvent("state-change", { detail: state })
             );

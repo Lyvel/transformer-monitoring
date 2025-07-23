@@ -5,5 +5,5 @@ export type Transformer = {
     name: string;
     region: string;
     health: string;
-    lastTenVoltageReadings: VoltageReading[];
+    lastTenVoltgageReadings: VoltageReading[];
 };
