@@ -3,6 +3,7 @@
 import { DataSourceSelector } from "@/components/data-source-selector";
 import { StatCard } from "@/components/stat-card";
 import { TransformerTable } from "@/components/transformer-table";
+import { VoltageChart } from "@/components/voltage-chart";
 import { useAppState } from "@/hooks/use-app-state.hook";
 import { Transformer } from "@/types/transformer.type";
 import { Activity, AlertTriangle, MapPin, Zap } from "lucide-react";
@@ -11,12 +12,16 @@ import { useEffect, useState } from "react";
 const Home = () => {
     const [transformers, setTransformers] = useState<Transformer[]>([]);
     const [showDataSourceSelector, setShowDataSourceSelector] = useState(true);
+    const [hasInitialisedSelection, setHasInitialisedSelection] =
+        useState(false);
     const { state, updateState, isLoaded } = useAppState();
 
     const handleDataLoad = (data: Transformer[]) => {
         setTransformers(data);
         // Reset selected transformers when new data is loaded
         updateState({ selectedTransformers: data.map((t) => t.assetId) });
+        // Mark that we've initialised the selection for this dataset
+        setHasInitialisedSelection(true);
         // Hide data source selector after loading data
         setShowDataSourceSelector(false);
     };
@@ -30,8 +35,14 @@ const Home = () => {
         ) {
             fetch("/sampledata.json")
                 .then((response) => response.json())
-                .then((data) => {
-                    handleDataLoad(data);
+                .then((data: Transformer[]) => {
+                    setTransformers(data);
+                    // Reset selected transformers when new data is loaded
+                    updateState({
+                        selectedTransformers: data.map((t) => t.assetId),
+                    });
+                    // Mark that we've initialized the selection for this dataset
+                    setHasInitialisedSelection(true);
                 })
                 .catch((error) => {
                     console.error("Failed to load sample data:", error);
@@ -39,23 +50,15 @@ const Home = () => {
         }
     }, [isLoaded, state.dataSource, transformers.length, updateState]);
 
-    // Initialise selected transformers if none are selected
+    // Initialise selected transformers if none are selected (only once per dataset)
     useEffect(() => {
-        if (
-            isLoaded &&
-            transformers.length > 0 &&
-            state.selectedTransformers.length === 0
-        ) {
+        if (isLoaded && transformers.length > 0 && !hasInitialisedSelection) {
             updateState({
                 selectedTransformers: transformers.map((t) => t.assetId),
             });
+            setHasInitialisedSelection(true);
         }
-    }, [
-        isLoaded,
-        transformers,
-        state.selectedTransformers.length,
-        updateState,
-    ]);
+    }, [isLoaded, transformers.length, hasInitialisedSelection, updateState]);
 
     const stats = {
         total: transformers.length,
@@ -172,6 +175,13 @@ const Home = () => {
                                 updateState({
                                     healthFilter: value === "all" ? "" : value,
                                 })
+                            }
+                        />
+                        <VoltageChart
+                            transformers={transformers}
+                            selectedTransformers={state.selectedTransformers}
+                            onSelectionChange={(value) =>
+                                updateState({ selectedTransformers: value })
                             }
                         />
                     </div>
