@@ -17,12 +17,12 @@ type ComponentProps = {
     onToggleVisibility: () => void;
 };
 
-export function DataSourceSelector({
+export const DataSourceSelector = ({
     onDataLoad,
     currentDataSource,
     isVisible,
     onToggleVisibility,
-}: ComponentProps) {
+}: ComponentProps) => {
     const [uploadStatus, setUploadStatus] = useState<
         "idle" | "loading" | "success" | "error"
     >("idle");
@@ -100,8 +100,8 @@ export function DataSourceSelector({
                         item.name &&
                         item.region &&
                         item.health &&
-                        Array.isArray(item.lastTenVoltageReadings) &&
-                        item.lastTenVoltageReadings.every(
+                        Array.isArray(item.lastTenVoltgageReadings) &&
+                        item.lastTenVoltgageReadings.every(
                             (reading: VoltageReading) =>
                                 reading.timestamp && reading.voltage
                         )
@@ -285,4 +285,4 @@ export function DataSourceSelector({
             </CardContent>
         </Card>
     );
-}
+};

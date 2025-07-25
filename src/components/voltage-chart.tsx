@@ -25,7 +25,7 @@ type ComponentProps = {
     onSelectionChange: (transformerIds: number[]) => void;
 };
 
-const COLORS = [
+const COLOURS = [
     "#8884d8",
     "#82ca9d",
     "#ffc658",
@@ -36,11 +36,11 @@ const COLORS = [
     "#ff0000",
 ];
 
-export function VoltageChart({
+export const VoltageChart = ({
     transformers,
     selectedTransformers,
     onSelectionChange,
-}: ComponentProps) {
+}: ComponentProps) => {
     const chartData = useMemo(() => {
         // Get all unique timestamps and sort them
         const allTimestamps = new Set<string>();
@@ -165,7 +165,7 @@ export function VoltageChart({
                                         className="w-3 h-3 rounded-full"
                                         style={{
                                             backgroundColor:
-                                                COLORS[index % COLORS.length],
+                                                COLOURS[index % COLOURS.length],
                                         }}
                                     />
                                     {transformer.name}
@@ -248,7 +248,7 @@ export function VoltageChart({
                                         key={transformer.assetId}
                                         type="monotone"
                                         dataKey={transformer.name}
-                                        stroke={COLORS[index % COLORS.length]}
+                                        stroke={COLOURS[index % COLOURS.length]}
                                         strokeWidth={2}
                                         dot={{ r: 4 }}
                                         connectNulls={true}
@@ -266,4 +266,4 @@ export function VoltageChart({
             </CardContent>
         </Card>
     );
-}
+};

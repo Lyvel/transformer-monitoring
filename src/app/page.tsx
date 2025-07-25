@@ -186,6 +186,7 @@ const Home = () => {
                         />
                     </div>
                 )}
+                {/* Footer */}
                 <footer className="mt-16 text-center text-sm text-muted-foreground">
                     <p>
                         Transformer Asset Monitoring System - Built with
