@@ -9,6 +9,14 @@ A Next.js application for monitoring electrical transformers with real-time volt
 -   Node.js 18 or later
 -   pnpm package manager
 
+### Install pnpm (if you don't have it)
+
+If you only have npm installed, you can install pnpm globally:
+
+```bash
+npm install -g pnpm
+```
+
 ### Getting Started
 
 1. Install dependencies:
