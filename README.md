@@ -66,7 +66,7 @@ docker-compose build --no-cache
 ## Features
 
 -   Real-time transformer monitoring
--   Voltage readings visualization
+-   Voltage readings visualisation
 -   Statistical analysis
 -   Data source selection
 -   Responsive design
