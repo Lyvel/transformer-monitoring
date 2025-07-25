@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Transformer Monitoring
 
-## Getting Started
+A Next.js application for monitoring electrical transformers with real-time voltage readings and statistics.
 
-First, run the development server:
+## Development
+
+### Prerequisites
+
+-   Node.js 18 or later
+-   pnpm package manager
+
+### Getting Started
+
+1. Install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Start the development server:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## Learn More
+The page will automatically reload when you make changes to the code.
 
-To learn more about Next.js, take a look at the following resources:
+## Production Deployment with Docker
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Quick Start
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Build and run with Docker Compose:
 
-## Deploy on Vercel
+```bash
+docker-compose up -d --build
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. Access the application at [http://localhost:3000](http://localhost:3000)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Docker Commands
+
+```bash
+# Build and start in detached mode
+docker-compose up -d --build
+
+# View logs
+docker-compose logs -f
+
+# Stop the application
+docker-compose down
+
+# Rebuild without cache
+docker-compose build --no-cache
+```
+
+## Features
+
+-   Real-time transformer monitoring
+-   Voltage readings visualization
+-   Statistical analysis
+-   Data source selection
+-   Responsive design
+
+## Tech Stack
+
+-   **Framework**: Next.js 15
+-   **UI**: React 19 with Tailwind CSS
+-   **Charts**: Recharts
+-   **Icons**: Lucide React
+-   **Components**: Shadcn / Radix UI
